@@ -1,0 +1,53 @@
+<%- include('components/header') %>
+<main>
+  <section class="px-20 container py-10">
+    <a
+      href="/"
+      class="text-sm text-gray-100 uppercase px-5 py-2.5 bg-gray-900 text-white rounded"
+    >
+      Back
+    </a>
+
+    <div class="my-5">
+      <div class="grid grid-cols-3 items-center justify-center">
+        <div class="col-span-1"></div>
+        <div class="col-span-1">
+          <form
+            action=""
+            class="px-10 py-8 bg-white rounded border-t-4 border-gray-900"
+          >
+            <div class="mb-4">
+              <label for="name" class="text-xs uppercase mb-1 block"
+                >User Name</label
+              >
+              <input
+                type="text"
+                class="block w-full py-2.5 px-3 border focus:outline-none text-sm placeholder:text-xs rounded"
+                placeholder="John Doe"
+              />
+            </div>
+            <div class="mb-4">
+              <label for="name" class="text-xs uppercase mb-1 block"
+                >Numbers</label
+              >
+              <input
+                type="number"
+                class="block w-full py-2.5 px-3 border focus:outline-none text-sm placeholder:text-xs rounded"
+                placeholder="****1013"
+              />
+            </div>
+            <div class="mb-2">
+              <button
+                class="py-2.5 bg-gray-900 text-white rounded w-full text-sm hover:bg-gray-800"
+              >
+                Add user
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="col-span-1"></div>
+      </div>
+    </div>
+  </section>
+</main>
+<%- include('components/footer') %>

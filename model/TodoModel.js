@@ -11,8 +11,12 @@ const todoSchema = new Schema(
       type: Number,
       required: true,
     },
+    token: {
+      type: Number,
+      required: true,
+    },
   },
-  { timeStamp: true }
+  { timestamps: true }
 );
 
 const TodoModel = model("todo", todoSchema);

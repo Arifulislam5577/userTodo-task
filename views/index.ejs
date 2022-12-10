@@ -1,13 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UserTodo</title>
-    <link rel="stylesheet" href="../public/css/styles.css" />
-  </head>
-  <body>
-    <h1>NodeJs!</h1>
-  </body>
-</html>
+<%- include('components/header') %>
+<main>
+  <section class="px-20 container py-10">
+    <a
+      href="/adduser"
+      class="text-sm text-gray-100 uppercase px-5 py-2.5 bg-gray-900 text-white rounded"
+    >
+      Add user
+    </a>
+
+    <div class="my-5">
+      <div class="overflow-x-auto relative">
+        <table
+          class="w-full text-sm text-left text-gray-100 dark:text-gray-400"
+        >
+          <thead class="text-sm text-gray-100 uppercase bg-gray-900">
+            <tr>
+              <th scope="col" class="py-5 px-6">UserName</th>
+              <th scope="col" class="py-5 px-6">TOKEN</th>
+              <th scope="col" class="py-5 px-6">Numbers</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-gray-300 text-gray-700 border-b">
+              <th scope="row" class="py-4 px-6">Ariful Islam</th>
+              <td class="py-4 px-6">10001</td>
+              <td class="py-4 px-6">32323232323</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+<%- include('components/footer') %>
