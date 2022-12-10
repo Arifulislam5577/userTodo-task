@@ -13,7 +13,8 @@
         <div class="col-span-1"></div>
         <div class="col-span-1">
           <form
-            action=""
+            action="/api/v1/todo"
+            method="POST"
             class="px-10 py-8 bg-white rounded border-t-4 border-gray-900"
           >
             <div class="mb-4">
@@ -24,6 +25,8 @@
                 type="text"
                 class="block w-full py-2.5 px-3 border focus:outline-none text-sm placeholder:text-xs rounded"
                 placeholder="John Doe"
+                name="userName"
+                required
               />
             </div>
             <div class="mb-4">
@@ -34,13 +37,16 @@
                 type="number"
                 class="block w-full py-2.5 px-3 border focus:outline-none text-sm placeholder:text-xs rounded"
                 placeholder="****1013"
+                required
+                name="numbers"
               />
             </div>
             <div class="mb-2">
               <button
+                type="submit"
                 class="py-2.5 bg-gray-900 text-white rounded w-full text-sm hover:bg-gray-800"
               >
-                Add user
+                Add Todo
               </button>
             </div>
           </form>

@@ -22,8 +22,8 @@ rootRoutes.get("/signup", (req, res) => {
   res.render("SignUp", { pageTitle: "Create User || Save Your Data" });
 });
 
-rootRoutes.get("/adduser", (req, res) => {
-  res.render("AddUser", { pageTitle: "Add New User|| Save Your Data" });
+rootRoutes.get("/addtodo", (req, res) => {
+  res.render("AddTodo", { pageTitle: "Add New Todo|| Save Your Data" });
 });
 
 export default rootRoutes;

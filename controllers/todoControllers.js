@@ -7,7 +7,7 @@ export const getAllTodos = async (req, res) => {
       res.status(200).json(todos);
     }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.send(error.message);
   }
 };
 
@@ -20,14 +20,14 @@ export const createTodos = async (req, res) => {
     if (findTodoByToken) {
       token = token + 1;
       const todo = new TodoModel({ userName, numbers, token });
-      const newTodo = await todo.save();
-      res.status(201).json(newTodo);
+      await todo.save();
+      res.redirect("/addtodo");
     } else {
       const todo = new TodoModel({ userName, numbers, token });
-      const newTodo = await todo.save();
-      res.status(201).json(newTodo);
+      await todo.save();
+      res.redirect("/addtodo");
     }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.send(error.message);
   }
 };

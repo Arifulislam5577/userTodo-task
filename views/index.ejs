@@ -2,7 +2,7 @@
 <main>
   <section class="px-20 container py-10">
     <a
-      href="/adduser"
+      href="/addtodo"
       class="text-sm text-gray-100 uppercase px-5 py-2.5 bg-gray-900 text-white rounded"
     >
       Add user
@@ -11,22 +11,26 @@
     <div class="my-5">
       <div class="overflow-x-auto relative">
         <table
-          class="w-full text-sm text-left text-gray-100 dark:text-gray-400"
+          class="w-full text-sm text-center text-gray-100 dark:text-gray-400"
         >
           <thead class="text-sm text-gray-100 uppercase bg-gray-900">
             <tr>
-              <th scope="col" class="py-5 px-6">UserName</th>
-              <th scope="col" class="py-5 px-6">TOKEN</th>
-              <th scope="col" class="py-5 px-6">Numbers</th>
+              <th scope="col" class="py-3 px-6">SL. NO</th>
+              <th scope="col" class="py-3 px-6">UserName</th>
+              <th scope="col" class="py-3 px-6">TOKEN</th>
+              <th scope="col" class="py-3 px-6">Numbers</th>
             </tr>
           </thead>
           <tbody>
-            <% todos.map((todo)=> { %>
+            <% todos.map((todo,index)=> { %>
 
-            <tr class="bg-gray-300 text-gray-700 border-b">
-              <th scope="row" class="py-4 px-6"><%= todo.userName %></th>
-              <td class="py-4 px-6"><%= todo.token %></td>
-              <td class="py-4 px-6"><%= todo.numbers %></td>
+            <tr
+              class="bg-gray-200 text-gray-700 border-b border-gray-300 hover:bg-gray-700 hover:text-white duration-300 transition-all"
+            >
+              <td class="py-3 px-6"><%= index+1 %></td>
+              <td class="py-3 px-6"><%= todo.userName %></td>
+              <td class="py-3 px-6"><%= todo.token %></td>
+              <td class="py-3 px-6"><%= todo.numbers %></td>
             </tr>
 
             <% }) %>
