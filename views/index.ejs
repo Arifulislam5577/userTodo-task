@@ -21,11 +21,15 @@
             </tr>
           </thead>
           <tbody>
+            <% todos.map((todo)=> { %>
+
             <tr class="bg-gray-300 text-gray-700 border-b">
-              <th scope="row" class="py-4 px-6">Ariful Islam</th>
-              <td class="py-4 px-6">10001</td>
-              <td class="py-4 px-6">32323232323</td>
+              <th scope="row" class="py-4 px-6"><%= todo.userName %></th>
+              <td class="py-4 px-6"><%= todo.token %></td>
+              <td class="py-4 px-6"><%= todo.numbers %></td>
             </tr>
+
+            <% }) %>
           </tbody>
         </table>
       </div>
