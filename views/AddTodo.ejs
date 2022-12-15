@@ -13,21 +13,27 @@
         <div class="col-span-1"></div>
         <div class="col-span-1">
           <form
-            action="/api/v1/todo"
-            method="POST"
+            id="form"
             class="px-10 py-8 bg-white rounded border-t-4 border-gray-900"
           >
             <div class="mb-4">
               <label for="name" class="text-xs uppercase mb-1 block"
                 >User Name</label
               >
-              <input
-                type="text"
-                class="block w-full py-2.5 px-3 border focus:outline-none text-sm placeholder:text-xs rounded"
-                placeholder="John Doe"
+
+              <select
+                id="userName"
                 name="userName"
-                required
-              />
+                class="block w-full py-2.5 px-3 border focus:outline-none text-sm placeholder:text-xs rounded"
+                onchange="getUserName()"
+              >
+                <% users.map((user,i)=> { %>
+
+                <option value="<%= user.userName %>">
+                  <%= user.userName %>
+                </option>
+                <% }) %>
+              </select>
             </div>
             <div class="mb-4">
               <label for="name" class="text-xs uppercase mb-1 block"
@@ -35,6 +41,7 @@
               >
               <input
                 type="number"
+                id="myNumber"
                 class="block w-full py-2.5 px-3 border focus:outline-none text-sm placeholder:text-xs rounded"
                 placeholder="****1013"
                 required
@@ -56,4 +63,40 @@
     </div>
   </section>
 </main>
+
+<script>
+  let userName = "";
+  const form = document.getElementById("form");
+  const numbers = document.querySelector("#myNumber");
+  const userId = "<%= user._id %>";
+
+  const getUserName = () => {
+    userName = document.getElementById("userName").value;
+  };
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("http://localhost:5000/api/v1/todo", {
+        method: "POST",
+        body: JSON.stringify({
+          userInfo: userId,
+          userName: userName,
+          numbers: numbers.value * 1,
+        }),
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      const result = await res.json();
+      if (result) {
+        location.assign("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  });
+</script>
+
 <%- include('components/footer') %>

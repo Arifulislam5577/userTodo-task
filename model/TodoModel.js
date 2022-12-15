@@ -3,6 +3,11 @@ const { Schema, model } = mongoose;
 
 const todoSchema = new Schema(
   {
+    userInfo: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "user",
+    },
     userName: {
       type: String,
       required: true,

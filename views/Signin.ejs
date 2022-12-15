@@ -10,13 +10,21 @@
     </a>
 
     <div class="my-5">
-      <div class="grid grid-cols-3 items-center justify-center">
-        <div class="col-span-1"></div>
-        <div class="col-span-1">
+      <div class="grid lg:grid-cols-3 grid-cols-1 items-center justify-center">
+        <div class="w-full lg:col-span-1"></div>
+        <div class="w-full lg:col-span-1">
           <form
-            action=""
+            action="/api/v1/user/signin"
+            method="POST"
             class="px-10 py-8 bg-white rounded border-t-4 border-gray-900"
+            id="signin-form"
           >
+            <div class="mb-4">
+              <p
+                id="error"
+                class="text-red-500 bg-gray-100 py-2.5 rounded text-center text-sm"
+              ></p>
+            </div>
             <div class="mb-4">
               <label for="name" class="text-xs uppercase mb-1 block"
                 >User Email</label
@@ -25,6 +33,9 @@
                 type="email"
                 class="block w-full py-2.5 px-3 border focus:outline-none text-sm placeholder:text-xs rounded"
                 placeholder="john@example.com"
+                required
+                name="email"
+                id="email"
               />
             </div>
             <div class="mb-4">
@@ -35,10 +46,14 @@
                 type="password"
                 class="block w-full py-2.5 px-3 border focus:outline-none text-sm placeholder:text-xs rounded"
                 placeholder="*****"
+                name="password"
+                required
+                id="password"
               />
             </div>
             <div class="mb-2">
               <button
+                type="submit"
                 class="py-2.5 bg-gray-900 text-white rounded w-full text-sm hover:bg-gray-800"
               >
                 Signin
@@ -50,10 +65,52 @@
             </p>
           </form>
         </div>
-        <div class="col-span-1"></div>
+        <div class="w-full lg:col-span-1"></div>
       </div>
     </div>
   </section>
 </main>
+
+<script>
+  const form = document.getElementById("signin-form");
+  const errorMessageBox = document.getElementById("error");
+
+  errorMessageBox.style.display = "none";
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    errorMessageBox.textContent = "";
+    errorMessageBox.style.display = "none";
+    try {
+      const response = await fetch("/api/v1/user/signin", {
+        method: "POST",
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+
+      const result = await response.json();
+
+      if (result?.message) {
+        errorMessageBox.style.display = "block";
+        errorMessageBox.textContent = result.message;
+      }
+      if (result?.userRole === "user") {
+        window.location.assign("/");
+      }
+      if (result?.userRole === "admin") {
+        window.location.assign("/admin");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  });
+</script>
 
 <%- include('components/footer') %>

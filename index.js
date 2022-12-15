@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import userRouter from "./apiRoutes/userRouter.js";
 import todoRouter from "./apiRoutes/todoRouter.js";
 import rootRoutes from "./routes/rootRouter.js";
@@ -12,7 +13,8 @@ const app = express();
 // DEFAULT MIDDLEWARE
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser(process.env.COOKIE_SECRET));
 mongoose.set("strictQuery", true);
 
 // VIEW ENGINE
@@ -22,6 +24,7 @@ app.set("view engine", "ejs");
 app.use("/", rootRoutes);
 
 // API ROUTES
+
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/todo", todoRouter);
 

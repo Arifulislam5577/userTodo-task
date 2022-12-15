@@ -1,0 +1,85 @@
+<%- include('components/header') %>
+<main>
+  <section class="px-20 container py-10">
+    <div class="my-5">
+      <form
+        id="myForm"
+        class="flex items-center gap-5"
+        action="/admin"
+        method="GET"
+      >
+        <input
+          type="date"
+          id="startDate"
+          name="startDate"
+          class="py-2 px-3 text-sm"
+        />
+        <span>to</span>
+        <input
+          type="date"
+          id="endDate"
+          name="endDate"
+          class="py-2 px-3 text-sm"
+        />
+        <input
+          type="submit"
+          value="Apply"
+          class="py-2 text-sm px-5 bg-gray-900 text-white rounded cursor-pointer"
+        />
+      </form>
+    </div>
+
+    <div class="overflow-x-auto relative">
+      <table
+        class="w-full text-sm text-center text-gray-100 dark:text-gray-400"
+      >
+        <thead class="text-sm text-gray-100 uppercase bg-gray-900">
+          <tr>
+            <th scope="col" class="py-3 px-6">SL. NO</th>
+            <th scope="col" class="py-3 px-6">UserName</th>
+            <th scope="col" class="py-3 px-6">Selected User</th>
+            <th scope="col" class="py-3 px-6">TOKEN</th>
+            <th scope="col" class="py-3 px-6">Numbers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% todos.map((todo,index)=> { %>
+
+          <tr
+            class="bg-gray-200 text-gray-700 border-b border-gray-300 hover:bg-gray-700 hover:text-white duration-300 transition-all"
+          >
+            <td class="py-3 px-6"><%= index+1 %></td>
+            <td class="py-3 px-6"><%= todo.userInfo.userName %></td>
+            <td class="py-3 px-6"><%= todo.userName %></td>
+            <td class="py-3 px-6"><%= todo.token %></td>
+            <td class="py-3 px-6"><%= todo.numbers %></td>
+          </tr>
+
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<script>
+  // const startDate = document.getElementById("startDate");
+  // const endDate = document.getElementById("endDate");
+  // document.getElementById("myForm").addEventListener("submit", async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const res = await fetch(
+  //       `http://localhost:5000/api/v1/todo?startDate=${startDate.value}&endDate=${endDate.value}`
+  //     );
+
+  //     const result = await res.json();
+
+  //     console.log(result);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // });
+</script>
+
+<%- include('components/footer') %>
