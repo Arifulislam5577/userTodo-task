@@ -25,7 +25,7 @@ app.set("view engine", "ejs");
 
 app.get("/", async (req, res) => {
   try {
-    const { data } = await axios.get(`/api/v1/todo`);
+    const { data } = await axios.get(`http://localhost:5000/api/v1/todo`);
     res.render("index", {
       pageTitle: "User Todo || Save Your Data",
       todos: data,
