@@ -1,5 +1,9 @@
 import express from "express";
 import axios from "axios";
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 import { currentUser, verifyToken } from "../middleware/verifyUser.js";
 const rootRoutes = express.Router();
 const domainName = `https://user-todo-task.vercel.app`;
@@ -9,7 +13,7 @@ rootRoutes.get("*", currentUser);
 rootRoutes.get("/", verifyToken, async (req, res) => {
   try {
     const { data } = await axios.get(`${domainName}/api/v1/todo`);
-    res.render("index", {
+    res.render(path.resolve(__dirname + "/views/index"), {
       pageTitle: "User Todo || Save Your Data",
       todos: data,
     });

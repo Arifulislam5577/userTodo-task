@@ -1,13 +1,11 @@
 import express from "express";
 import cors from "cors";
-import axios from "axios";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import userRouter from "./apiRoutes/userRouter.js";
 import todoRouter from "./apiRoutes/todoRouter.js";
 import rootRoutes from "./routes/rootRouter.js";
-const domainName = `https://user-todo-task.vercel.app`;
 dotenv.config();
 const app = express();
 
@@ -22,13 +20,6 @@ mongoose.set("strictQuery", true);
 app.set("view engine", "ejs");
 
 // CLIENT SIDE ROUTES
-
-app.get("/", (req, res) => {
-  res.render("Demo", {
-    pageTitle: "Demo Todo || Save Your Data",
-  });
-});
-
 app.use("/", rootRoutes);
 
 // API ROUTES
