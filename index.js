@@ -7,7 +7,7 @@ import cookieParser from "cookie-parser";
 import userRouter from "./apiRoutes/userRouter.js";
 import todoRouter from "./apiRoutes/todoRouter.js";
 import rootRoutes from "./routes/rootRouter.js";
-
+const domainName = `https://user-todo-task.vercel.app`;
 dotenv.config();
 const app = express();
 
@@ -22,6 +22,18 @@ mongoose.set("strictQuery", true);
 app.set("view engine", "ejs");
 
 // CLIENT SIDE ROUTES
+
+app.get("/", async (req, res) => {
+  try {
+    const { data } = await axios.get(`${domainName}/api/v1/todo`);
+    res.render("index", {
+      pageTitle: "User Todo || Save Your Data",
+      todos: data,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 app.use("/", rootRoutes);
 
