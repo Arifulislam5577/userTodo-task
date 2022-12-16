@@ -14,7 +14,7 @@
         <div class="w-full lg:col-span-1"></div>
         <div class="w-full lg:col-span-1">
           <form
-            action="https://usertodo-xi.vercel.app/api/v1/user/signin"
+            action="/api/v1/user/signin"
             method="POST"
             class="px-10 py-8 bg-white rounded border-t-4 border-gray-900"
             id="signin-form"
@@ -84,19 +84,16 @@
     errorMessageBox.textContent = "";
     errorMessageBox.style.display = "none";
     try {
-      const response = await fetch(
-        "https://usertodo-xi.vercel.app/api/v1/user/signin",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            email,
-            password,
-          }),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-          },
-        }
-      );
+      const response = await fetch("http://localhost:5000/api/v1/user/signin", {
+        method: "POST",
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
 
       const result = await response.json();
 

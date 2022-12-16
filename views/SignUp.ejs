@@ -92,20 +92,17 @@
     errorMessageBox.textContent = "";
     errorMessageBox.style.display = "none";
     try {
-      const res = await fetch(
-        "https://usertodo-xi.vercel.app/api/v1/user/signup",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            userName,
-            email,
-            password,
-          }),
-          headers: {
-            "Content-type": "application/json",
-          },
-        }
-      );
+      const res = await fetch("http://localhost:5000/api/v1/user/signup", {
+        method: "POST",
+        body: JSON.stringify({
+          userName,
+          email,
+          password,
+        }),
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
       const result = await res.json();
       if (result.message) {
         errorMessageBox.style.display = "block";

@@ -2,7 +2,8 @@ import express from "express";
 import axios from "axios";
 import { currentUser, verifyToken } from "../middleware/verifyUser.js";
 const rootRoutes = express.Router();
-const domainName = process.env.domainName;
+const domainName = `http://localhost:5000`;
+
 rootRoutes.get("*", currentUser);
 
 rootRoutes.get("/", verifyToken, async (req, res) => {
@@ -13,12 +14,12 @@ rootRoutes.get("/", verifyToken, async (req, res) => {
       todos: data,
     });
   } catch (error) {
-    res.send(error);
+    res.status(500).json({ message: error.message });
   }
 });
 
 rootRoutes.get("/signin", (req, res) => {
-  res.render("SignIn", { pageTitle: "Login || Save Your Data" });
+  res.render("Signin", { pageTitle: "Login || Save Your Data" });
 });
 
 rootRoutes.get("/admin", verifyToken, async (req, res) => {
