@@ -23,18 +23,6 @@ app.set("view engine", "ejs");
 
 // CLIENT SIDE ROUTES
 
-app.get("/", async (req, res) => {
-  try {
-    const { data } = await axios.get(`http://localhost:5000/api/v1/todo`);
-    res.render("index", {
-      pageTitle: "User Todo || Save Your Data",
-      todos: data,
-    });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
 app.use("/", rootRoutes);
 
 // API ROUTES

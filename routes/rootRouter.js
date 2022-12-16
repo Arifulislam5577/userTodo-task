@@ -2,7 +2,7 @@ import express from "express";
 import axios from "axios";
 import { currentUser, verifyToken } from "../middleware/verifyUser.js";
 const rootRoutes = express.Router();
-const domainName = `http://localhost:5000`;
+const domainName = `https://user-todo-task.vercel.app`;
 
 rootRoutes.get("*", currentUser);
 
