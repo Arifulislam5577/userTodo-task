@@ -2,12 +2,12 @@ import express from "express";
 import axios from "axios";
 import { currentUser, verifyToken } from "../middleware/verifyUser.js";
 const rootRoutes = express.Router();
-
+const domainName = process.env.domainName;
 rootRoutes.get("*", currentUser);
 
 rootRoutes.get("/", verifyToken, async (req, res) => {
   try {
-    const { data } = await axios.get("http://localhost:5000/api/v1/todo");
+    const { data } = await axios.get(`${domainName}/api/v1/todo`);
     res.render("index", {
       pageTitle: "User Todo || Save Your Data",
       todos: data,
@@ -23,9 +23,13 @@ rootRoutes.get("/signin", (req, res) => {
 
 rootRoutes.get("/admin", verifyToken, async (req, res) => {
   const { startDate, endDate } = req.query;
-  let { data } = await axios.get(
-    `http://localhost:5000/api/v1/todo?startDate=${startDate}&endDate=${endDate}`
-  );
+
+  let url = `${domainName}/api/v1/todo`;
+
+  if (startDate && endDate) {
+    url = `${domainName}/api/v1/todo?startDate=${startDate}&endDate=${endDate}`;
+  }
+  let { data } = await axios.get(url);
 
   res.render("Admin", {
     pageTitle: "Admin || Save Your Data",
@@ -38,9 +42,7 @@ rootRoutes.get("/signup", (req, res) => {
 });
 
 rootRoutes.get("/addtodo", verifyToken, async (req, res) => {
-  const { data } = await axios.get(
-    "http://localhost:5000/api/v1/user/demouser"
-  );
+  const { data } = await axios.get(`${domainName}/api/v1/user/demouser`);
   res.render("AddTodo", {
     pageTitle: "Add New Todo|| Save Your Data",
     users: data,
