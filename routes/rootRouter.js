@@ -23,7 +23,9 @@ rootRoutes.get("/", verifyToken, async (req, res) => {
 });
 
 rootRoutes.get("/signin", (req, res) => {
-  res.render("Signin", { pageTitle: "Login || Save Your Data" });
+  res.render(path.resolve(__dirname + "/views/Signin"), {
+    pageTitle: "Login || Save Your Data",
+  });
 });
 
 rootRoutes.get("/admin", verifyToken, async (req, res) => {
@@ -36,19 +38,21 @@ rootRoutes.get("/admin", verifyToken, async (req, res) => {
   }
   let { data } = await axios.get(url);
 
-  res.render("Admin", {
+  res.render(path.resolve(__dirname + "/views/Admin"), {
     pageTitle: "Admin || Save Your Data",
     todos: data,
   });
 });
 
 rootRoutes.get("/signup", (req, res) => {
-  res.render("SignUp", { pageTitle: "Create User || Save Your Data" });
+  res.render(path.resolve(__dirname + "/views/SignUp"), {
+    pageTitle: "Create User || Save Your Data",
+  });
 });
 
 rootRoutes.get("/addtodo", verifyToken, async (req, res) => {
   const { data } = await axios.get(`${domainName}/api/v1/user/demouser`);
-  res.render("AddTodo", {
+  res.render(path.resolve(__dirname + "/views/AddTodo"), {
     pageTitle: "Add New Todo|| Save Your Data",
     users: data,
   });
