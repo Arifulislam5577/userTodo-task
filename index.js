@@ -21,6 +21,11 @@ mongoose.set("strictQuery", true);
 app.set("view engine", "ejs");
 
 // CLIENT SIDE ROUTES
+
+app.get("/", (req, res) => {
+  res.send("<h1>Hello World</h1>");
+});
+
 app.use("/", rootRoutes);
 
 // API ROUTES
