@@ -8,12 +8,11 @@ import { currentUser, verifyToken } from "../middleware/verifyUser.js";
 const rootRoutes = express.Router();
 // const domainName = `https://user-todo-task.vercel.app`;
 const domainName = `http://localhost:5000`;
-
 rootRoutes.get("*", currentUser);
 
 rootRoutes.get("/", verifyToken, async (req, res) => {
   try {
-    const { data } = await axios.get(`${domainName}/api/v1/todo`);
+    const { data } = await axios.get(`/api/v1/todo`);
     res.render("Home", {
       pageTitle: "User Todo || Save Your Data",
       todos: data,
@@ -32,10 +31,10 @@ rootRoutes.get("/signin", (req, res) => {
 rootRoutes.get("/admin", verifyToken, async (req, res) => {
   const { startDate, endDate } = req.query;
 
-  let url = `${domainName}/api/v1/todo`;
+  let url = `/api/v1/todo`;
 
   if (startDate && endDate) {
-    url = `${domainName}/api/v1/todo?startDate=${startDate}&endDate=${endDate}`;
+    url = `/api/v1/todo?startDate=${startDate}&endDate=${endDate}`;
   }
   let { data } = await axios.get(url);
 
@@ -52,7 +51,7 @@ rootRoutes.get("/signup", (req, res) => {
 });
 
 rootRoutes.get("/addtodo", verifyToken, async (req, res) => {
-  const { data } = await axios.get(`${domainName}/api/v1/user/demouser`);
+  const { data } = await axios.get(`/api/v1/user/demouser`);
   res.render("AddTodo", {
     pageTitle: "Add New Todo|| Save Your Data",
     users: data,
