@@ -6,14 +6,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 import { currentUser, verifyToken } from "../middleware/verifyUser.js";
 const rootRoutes = express.Router();
-const domainName = `https://user-todo-task.vercel.app`;
+// const domainName = `https://user-todo-task.vercel.app`;
+const domainName = `http://localhost:5000`;
 
 rootRoutes.get("*", currentUser);
 
 rootRoutes.get("/", verifyToken, async (req, res) => {
   try {
     const { data } = await axios.get(`${domainName}/api/v1/todo`);
-    res.render(path.resolve(__dirname + "/views/index"), {
+    res.render("Home", {
       pageTitle: "User Todo || Save Your Data",
       todos: data,
     });
@@ -23,7 +24,7 @@ rootRoutes.get("/", verifyToken, async (req, res) => {
 });
 
 rootRoutes.get("/signin", (req, res) => {
-  res.render(path.resolve(__dirname + "/views/Signin"), {
+  res.render("Signin", {
     pageTitle: "Login || Save Your Data",
   });
 });
@@ -38,21 +39,21 @@ rootRoutes.get("/admin", verifyToken, async (req, res) => {
   }
   let { data } = await axios.get(url);
 
-  res.render(path.resolve(__dirname + "/views/Admin"), {
+  res.render("Admin", {
     pageTitle: "Admin || Save Your Data",
     todos: data,
   });
 });
 
 rootRoutes.get("/signup", (req, res) => {
-  res.render(path.resolve(__dirname + "/views/SignUp"), {
+  res.render("SignUp", {
     pageTitle: "Create User || Save Your Data",
   });
 });
 
 rootRoutes.get("/addtodo", verifyToken, async (req, res) => {
   const { data } = await axios.get(`${domainName}/api/v1/user/demouser`);
-  res.render(path.resolve(__dirname + "/views/AddTodo"), {
+  res.render("AddTodo", {
     pageTitle: "Add New Todo|| Save Your Data",
     users: data,
   });
